@@ -4,7 +4,8 @@
     "apiBaseUrl": "/api",
     "authentication": {
       "enable": false,
-      "token": ""
+      "password": "",
+      "jwt-secret": ""
     }
   }
 }
