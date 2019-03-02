@@ -23,6 +23,18 @@ function find(options) {
   });
 }
 
+function nconfify(obj, currentKey = '', keyValues = []) {
+  for (const entry of Object.entries(obj)) {
+    const key = currentKey + entry[0];
+    if (typeof entry[1] !== 'object') {
+      keyValues.push([key, entry[1]]);
+    } else {
+      nconfify(entry[1], key + ':', keyValues);
+    }
+  }
+  return keyValues;
+}
+
 async function getDownloadHeaders(options) {
   let headers = [];
   if (options.path) {
@@ -85,5 +97,6 @@ module.exports = {
   encodePath,
   decodePath,
   find,
-  getDownloadHeaders
+  getDownloadHeaders,
+  nconfify
 };

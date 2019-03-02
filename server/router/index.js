@@ -1,10 +1,12 @@
 const Router = require('koa-router');
+const bodyParser = require('koa-bodyparser');
 const services = require('../services');
 const api = require('./api');
 
 module.exports = function(nuxt) {
   const router = new Router();
 
+  router.use(bodyParser());
   router.use(services.config.get('server:apiBaseUrl'), api);
 
   if (nuxt) {
