@@ -10,7 +10,7 @@ module.exports = function() {
       ctx.set(header.header, header.value);
     });
     ctx.body = fs.createReadStream(
-      services.resolve(services.config.rootDir, ctx.params.file)
+      services.resolve(services.config.get('server:rootDir'), ctx.params.file)
     );
   };
 };

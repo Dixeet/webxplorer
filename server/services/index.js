@@ -26,7 +26,9 @@ function find(options) {
 async function getDownloadHeaders(options) {
   let headers = [];
   if (options.path) {
-    const stat = await fs.stat(resolve(config.rootDir, options.path));
+    const stat = await fs.stat(
+      resolve(config.get('server:rootDir'), options.path)
+    );
     headers = [
       {
         header: 'Last-Modified',
@@ -54,10 +56,6 @@ async function getDownloadHeaders(options) {
   return headers;
 }
 
-function getConfig() {
-  return { ...config };
-}
-
 function resolve() {
   return Path.resolve(...arguments);
 }
@@ -81,7 +79,7 @@ function decodePath(path) {
 }
 
 module.exports = {
-  config: getConfig(),
+  config: config,
   resolve,
   join,
   encodePath,

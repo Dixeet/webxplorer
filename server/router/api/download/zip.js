@@ -23,7 +23,10 @@ function getZipName(path) {
 module.exports = function() {
   return async function zipMiddleware(ctx) {
     const path = services.decodePath(ctx.params.path);
-    const fullPath = services.resolve(services.config.rootDir, path);
+    const fullPath = services.resolve(
+      services.config.get('server:rootDir'),
+      path
+    );
     const stat = await fs.stat(fullPath);
     const zip = new AdmZip();
     let buff = null;

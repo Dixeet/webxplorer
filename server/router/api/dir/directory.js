@@ -3,14 +3,17 @@ const services = require('../../../services');
 
 async function getFiles(path) {
   const dirFiles = await fs.readdir(
-    services.resolve(services.config.rootDir, path),
+    services.resolve(services.config.get('server:rootDir'), path),
     { withFileTypes: true }
   );
   const files = [];
   for (const file of dirFiles) {
     if (file.name[0] !== '.') {
       const filePath = services.join(path, file.name);
-      const fullPath = services.join(services.config.rootDir, filePath);
+      const fullPath = services.join(
+        services.config.get('server:rootDir'),
+        filePath
+      );
       const { mtimeMs, size, mtime } = await fs.stat(fullPath);
       files.push({
         name: file.name,

@@ -1,4 +1,9 @@
-module.exports = {
-  rootDir: '/home/robin/Documents/test/webxplorer',
-  apiBaseUrl: '/api'
-};
+const path = require('path');
+const nconf = require('nconf');
+
+nconf
+  .argv()
+  .env()
+  .file(path.resolve(__dirname, '../../', 'config.json'));
+
+module.exports = nconf;

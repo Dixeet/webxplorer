@@ -5,7 +5,7 @@ const api = require('./api');
 module.exports = function(nuxt) {
   const router = new Router();
 
-  router.use(services.config.apiBaseUrl, api);
+  router.use(services.config.get('server:apiBaseUrl'), api);
 
   if (nuxt) {
     router.get('*', ctx => {
