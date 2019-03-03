@@ -2,7 +2,7 @@
   "server": {
     "rootDir": "~/",
     "apiBaseUrl": "/api",
-    "authentication": {
+    "auth": {
       "enable": false,
       "password": "",
       "jwt-secret": ""

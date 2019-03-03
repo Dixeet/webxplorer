@@ -1,11 +1,19 @@
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
+const jwt = require('koa-jwt');
 const services = require('../services');
 const api = require('./api');
 
 module.exports = function(nuxt) {
   const router = new Router();
 
+  router.use(
+    jwt({
+      secret: services.config.get('server:auth:jwt-secret'),
+      passthrough: true,
+      key: 'jwtdata'
+    })
+  );
   router.use(bodyParser());
   router.use(services.config.get('server:apiBaseUrl'), api);
 

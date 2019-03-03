@@ -23,7 +23,7 @@ program
       console.log(`Hash : ${hash}`);
       if (cmd.save) {
         console.log('Saving newly generate hash to config.json');
-        config.set('server:authentication:password', hash);
+        config.set('server:auth:password', hash);
         config.save(err => {
           if (err) {
             console.error('Error saving to config.json', err);
@@ -38,17 +38,13 @@ program
   .command('compare <password>')
   .description('| Compare a password with the hash in config.json file')
   .action(password => {
-    bcrypt.compare(
-      password,
-      config.get('server:authentication:password'),
-      (err, res) => {
-        if (err) {
-          console.error(`Error : ${err}`);
-          exit();
-        }
-        console.log(res ? 'Password matches' : 'Password doesnt match');
+    bcrypt.compare(password, config.get('server:auth:password'), (err, res) => {
+      if (err) {
+        console.error(`Error : ${err}`);
+        exit();
       }
-    );
+      console.log(res ? 'Password matches' : 'Password doesnt match');
+    });
   });
 
 program.parse(process.argv);
