@@ -1,6 +1,44 @@
 <template>
   <div>
-    <nuxt />
+    <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <nuxt-link class="navbar-item is-size-5 has-text-weight-bold" to="/home/">
+            Webxplorer
+          </nuxt-link>
+        
+          <a
+            @click="$store.dispatch('toggleBurger')"
+            :class="{ 'is-active': $store.state.navbarBurgerIsActive}"
+            role="button"
+            class="navbar-burger burger"
+            aria-label="menu"
+            aria-expanded="false"
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </a>
+        </div>
+        <div class="navbar-menu" :class="{ 'is-active': $store.state.navbarBurgerIsActive}">
+          <div class="navbar-start">
+            <nuxt-link class="navbar-item" to="/home/tata/titi">
+              Wrong
+            </nuxt-link>
+            <nuxt-link class="navbar-item" to="/login">
+              Login
+            </nuxt-link>
+          </div>
+        
+          <div class="navbar-end">
+            <div class="navbar-item" />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <nuxt />
+    </div>
   </div>
 </template>
 

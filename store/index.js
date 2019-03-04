@@ -1,6 +1,7 @@
 export const state = () => ({
   config: {},
   notification: { message: '', type: '' },
+  navbarBurgerIsActive: false,
 });
 
 export const mutations = {
@@ -13,6 +14,9 @@ export const mutations = {
   ) {
     state.notification = notification;
   },
+  toggleBurger(state) {
+    state.navbarBurgerIsActive = !state.navbarBurgerIsActive;
+  },
 };
 
 export const actions = {
@@ -20,5 +24,9 @@ export const actions = {
     if (req.config) {
       state.config = req.config;
     }
+  },
+  toggleBurger({ commit }) {
+    console.log('totot');
+    commit('toggleBurger');
   },
 };
