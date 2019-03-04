@@ -1,24 +1,18 @@
 <template>
   <section class="section">
-    <nav class="breadcrumb is-large" aria-label="breadcrumbs">
-      <ul>
-        <nuxt-link
-          v-for="(part) in breadcrumb"
-          :key="part.path"
-          tag="li"
-          :to="part.path"
-        >
-          <a>{{ part.name }}</a>
-        </nuxt-link>
-      </ul>
-    </nav>
+    <breadcrumb :path="breadcrumb" />
   </section>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
+import breadcrumb from '~/components/breadcrumb';
 
 export default {
+  components: {
+    breadcrumb,
+  },
+
   computed: {
     ...mapState('dir', ['dirFiles']),
     ...mapGetters('dir', ['breadcrumb']),
