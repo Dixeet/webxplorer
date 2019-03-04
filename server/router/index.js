@@ -11,7 +11,8 @@ module.exports = function(nuxt) {
     jwt({
       secret: services.config.get('server:auth:jwt-secret'),
       passthrough: true,
-      key: 'jwtdata'
+      key: 'jwtdata',
+      cookie: 'jwt-token'
     })
   );
   router.use(bodyParser());
@@ -22,6 +23,10 @@ module.exports = function(nuxt) {
       ctx.status = 200;
       ctx.respond = false; // Bypass Koa's built-in response handling test
       ctx.req.ctx = ctx; // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
+      ctx.req.config = {
+        apiBaseUrl: services.config.get('server:apiBaseUrl'),
+        authEnable: services.config.get('server:auth:enable')
+      };
       nuxt.render(ctx.req, ctx.res);
     });
   } else {

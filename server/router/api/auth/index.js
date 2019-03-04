@@ -22,12 +22,15 @@ async function login(ctx) {
   if (!res) {
     ctx.throw(401, 'Password does not match');
   }
+  const date = new Date();
+  const token = await sign(
+    { iat: Math.floor(date.getTime() / 1000) },
+    services.config.get('server:auth:jwt-secret'),
+    { expiresIn: '2h' }
+  );
+  ctx.set('Set-Cookie', `jwt-token=${token}; Max-Age=7200; Path=/`);
   ctx.body = {
-    token: await sign(
-      { iat: Math.floor(Date.now() / 1000) },
-      services.config.get('server:auth:jwt-secret'),
-      { expiresIn: '2h' }
-    )
+    token: token
   };
 }
 

@@ -6,14 +6,13 @@ const configRoute = require('./config');
 const auth = require('./auth');
 const authRequired = require('./authRequired');
 
-router.use(authRequired());
 router.get('/', ctx => {
   ctx.body = 'API endpoints';
 });
 
-router.use('/dir', dir);
-router.use('/download', download);
-router.use('/config', configRoute);
+router.use('/dir', authRequired(), dir);
+router.use('/download', authRequired(), download);
+router.use('/config', authRequired(), configRoute);
 router.use('/auth', auth);
 
 module.exports = router.routes();
