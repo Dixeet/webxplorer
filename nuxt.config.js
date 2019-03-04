@@ -1,11 +1,7 @@
 const pkg = require('./package');
 
 module.exports = {
-  mode: 'spa',
-  // server: {
-  //   port: 3000, // default: 3000
-  //   host: '0.0.0.0' // default: localhost,
-  // },
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -16,7 +12,13 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: '//use.fontawesome.com/releases/v5.7.2/css/all.css'
+      }
+    ]
   },
 
   /*
@@ -27,21 +29,20 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [],
+  css: ['@assets/css/theme/index.scss'],
 
+  /*
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: ['~plugins/buefy.js'],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma'
+    '@nuxtjs/axios'
   ],
   /*
   ** Axios module configuration

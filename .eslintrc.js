@@ -10,14 +10,12 @@ module.exports = {
   extends: [
     '@nuxtjs',
     // 'plugin:prettier/recommended',
-    'prettier',
+    'prettier'
   ],
-  plugins: [
-    'prettier',
-  ],
+  plugins: ['prettier'],
   // add your custom rules here
   rules: {
     'prettier/prettier': 'error',
     'no-console': 'warn'
   }
-}
+};
