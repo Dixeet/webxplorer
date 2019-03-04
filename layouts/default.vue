@@ -8,12 +8,12 @@
           </nuxt-link>
         
           <a
-            @click="$store.dispatch('toggleBurger')"
-            :class="{ 'is-active': $store.state.navbarBurgerIsActive}"
             role="button"
+            :class="{ 'is-active': $store.state.navbarBurgerIsActive}"
             class="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
+            @click="$store.dispatch('toggleBurger')"
           >
             <span aria-hidden="true" />
             <span aria-hidden="true" />

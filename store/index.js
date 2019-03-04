@@ -26,7 +26,6 @@ export const actions = {
     }
   },
   toggleBurger({ commit }) {
-    console.log('totot');
     commit('toggleBurger');
   },
 };

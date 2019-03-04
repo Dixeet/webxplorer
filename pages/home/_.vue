@@ -1,6 +1,8 @@
 <template>
   <section class="section">
-    <h1 class="title is-1">Test</h1>
+    <h1 class="title is-1">
+      Test
+    </h1>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium ad animi aut autem
       consequuntur dolor enim et facilis, fugit illo illum nesciunt optio porro quibusdam quos
