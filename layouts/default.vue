@@ -3,7 +3,7 @@
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
-          <nuxt-link class="navbar-item is-size-5 has-text-weight-bold" to="/home/">
+          <nuxt-link class="navbar-item is-size-5 has-text-weight-bold brand-link" to="/home/">
             Webxplorer
           </nuxt-link>
         
@@ -22,6 +22,12 @@
         </div>
         <div class="navbar-menu" :class="{ 'is-active': $store.state.navbarBurgerIsActive}">
           <div class="navbar-start">
+            <nuxt-link class="navbar-item" to="/home/">
+              Home
+            </nuxt-link>
+            <nuxt-link class="navbar-item" to="/home/normal">
+              Good
+            </nuxt-link>
             <nuxt-link class="navbar-item" to="/home/tata/titi">
               Wrong
             </nuxt-link>
@@ -78,3 +84,10 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import '~assets/css/theme/_variables.scss';
+.brand-link.is-active {
+  color: $text-strong;
+}
+</style>

@@ -1,37 +1,27 @@
 <template>
   <section class="section">
-    <h1 class="title is-1">
-      Test
-    </h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium ad animi aut autem
-      consequuntur dolor enim et facilis, fugit illo illum nesciunt optio porro quibusdam quos
-      ratione saepe suscipit?
-    </p>
-    <p>
-      Nesciunt officiis quas qui quis ratione rerum. Adipisci blanditiis consequuntur, deserunt
-      dolorum ducimus excepturi fugiat fugit iste itaque magni nemo numquam pariatur porro
-      quibusdam reprehenderit rerum sunt. Earum, quisquam voluptate!
-    </p>
-    <p>
-      Beatae cum eligendi eveniet fugit rerum? Aliquid exercitationem hic ratione sunt veniam,
-      voluptatem! Architecto beatae corporis, cum debitis dolorem expedita fugiat itaque labore
-      nobis quam quis rerum tempore. Fuga, totam?
-    </p>
-    <p>
-      Autem consequatur cum deserunt dicta distinctio error eum iure magnam, molestiae nihil optio
-      quaerat quod rem similique sint sit suscipit! Ducimus est eveniet fugiat laudantium nemo
-      reiciendis tempora vel. Voluptas?
-    </p>
+    <nav class="breadcrumb is-large" aria-label="breadcrumbs">
+      <ul>
+        <nuxt-link
+          v-for="(part) in breadcrumb"
+          :key="part.path"
+          tag="li"
+          :to="part.path"
+        >
+          <a>{{ part.name }}</a>
+        </nuxt-link>
+      </ul>
+    </nav>
   </section>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   computed: {
     ...mapState('dir', ['dirFiles']),
+    ...mapGetters('dir', ['breadcrumb']),
   },
 
   async asyncData({ params, store }) {
