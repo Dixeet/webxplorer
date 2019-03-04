@@ -22,7 +22,6 @@ module.exports = function(nuxt) {
     router.get('*', ctx => {
       ctx.status = 200;
       ctx.respond = false; // Bypass Koa's built-in response handling test
-      ctx.req.ctx = ctx; // This might be useful later on, e.g. in nuxtServerInit or with nuxt-stash
       ctx.req.config = {
         apiBaseUrl: services.config.get('server:apiBaseUrl'),
         authEnable: services.config.get('server:auth:enable')
