@@ -39,30 +39,30 @@ async function getDownloadHeaders(options) {
   let headers = [];
   if (options.path) {
     const stat = await fs.stat(
-      resolve(config.get('server:rootDir'), options.path)
+      resolve(config.get('server:rootDir'), options.path),
     );
     headers = [
       {
         header: 'Last-Modified',
-        value: stat.mtime.toUTCString()
+        value: stat.mtime.toUTCString(),
       },
       {
         header: 'Date',
-        value: stat.birthtime.toUTCString()
+        value: stat.birthtime.toUTCString(),
       },
       {
         header: 'Content-Length',
-        value: stat.size
+        value: stat.size,
       },
       {
         header: 'Content-Type',
-        value: mime.contentType(options.path)
+        value: mime.contentType(options.path),
       },
       {
         header: 'Content-Disposition',
         value: `attachment; filename="${options.name ||
-          options.path.split('/').splice(-1, 1)[0]}"`
-      }
+          options.path.split('/').splice(-1, 1)[0]}"`,
+      },
     ];
   }
   return headers;
@@ -98,5 +98,5 @@ module.exports = {
   decodePath,
   find,
   getDownloadHeaders,
-  nconfify
+  nconfify,
 };

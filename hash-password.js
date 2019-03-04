@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 const program = require('commander');
 const bcrypt = require('bcrypt');
 const config = require('./server/services/config');

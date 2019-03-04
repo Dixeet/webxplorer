@@ -10,7 +10,7 @@ function toBuff(zip) {
       },
       err => {
         reject(err);
-      }
+      },
     );
   });
 }
@@ -25,7 +25,7 @@ module.exports = function() {
     const path = services.decodePath(ctx.params.path);
     const fullPath = services.resolve(
       services.config.get('server:rootDir'),
-      path
+      path,
     );
     const stat = await fs.stat(fullPath);
     const zip = new AdmZip();
@@ -43,7 +43,7 @@ module.exports = function() {
     ctx.set('Content-Length', buff.length);
     ctx.set(
       'Content-Disposition',
-      `attachment; filename="${getZipName(path)}"`
+      `attachment; filename="${getZipName(path)}"`,
     );
     ctx.body = buff;
   };

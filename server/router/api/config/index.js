@@ -22,7 +22,7 @@ router.post('/', async ctx => {
     await saveConf();
   }
   ctx.body = {
-    message: 'Config saved'
+    message: 'Config saved',
   };
 });
 

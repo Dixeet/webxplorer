@@ -12,8 +12,8 @@ module.exports = function(nuxt) {
       secret: services.config.get('server:auth:jwt-secret'),
       passthrough: true,
       key: 'jwtdata',
-      cookie: 'jwt-token'
-    })
+      cookie: 'jwt-token',
+    }),
   );
   router.use(bodyParser());
   router.use(services.config.get('server:apiBaseUrl'), api);
@@ -24,7 +24,7 @@ module.exports = function(nuxt) {
       ctx.respond = false; // Bypass Koa's built-in response handling test
       ctx.req.config = {
         apiBaseUrl: services.config.get('server:apiBaseUrl'),
-        authEnable: services.config.get('server:auth:enable')
+        authEnable: services.config.get('server:auth:enable'),
       };
       nuxt.render(ctx.req, ctx.res);
     });

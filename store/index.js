@@ -1,5 +1,5 @@
 export const state = () => ({
-  config: {}
+  config: {},
 });
 
 export const actions = {
@@ -7,5 +7,5 @@ export const actions = {
     if (req.config) {
       state.config = req.config;
     }
-  }
+  },
 };

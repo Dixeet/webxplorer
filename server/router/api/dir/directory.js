@@ -4,7 +4,7 @@ const services = require('../../../services');
 async function getFiles(path) {
   const dirFiles = await fs.readdir(
     services.resolve(services.config.get('server:rootDir'), path),
-    { withFileTypes: true }
+    { withFileTypes: true },
   );
   const files = [];
   for (const file of dirFiles) {
@@ -12,7 +12,7 @@ async function getFiles(path) {
       const filePath = services.join(path, file.name);
       const fullPath = services.join(
         services.config.get('server:rootDir'),
-        filePath
+        filePath,
       );
       const { mtimeMs, size, mtime } = await fs.stat(fullPath);
       files.push({
@@ -23,7 +23,7 @@ async function getFiles(path) {
         fullPath,
         path: filePath,
         encodedPath: services.encodePath(filePath),
-        isDirectory: file.isDirectory()
+        isDirectory: file.isDirectory(),
       });
     }
   }

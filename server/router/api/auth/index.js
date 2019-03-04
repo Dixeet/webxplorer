@@ -10,14 +10,14 @@ const router = new Router();
 
 async function login(ctx) {
   const {
-    request: { body }
+    request: { body },
   } = ctx;
   if (typeof body.password === 'undefined') {
     ctx.throw(400, '"password" field required');
   }
   const res = await compare(
     body.password,
-    services.config.get('server:auth:password')
+    services.config.get('server:auth:password'),
   );
   if (!res) {
     ctx.throw(401, 'Password does not match');
@@ -26,11 +26,11 @@ async function login(ctx) {
   const token = await sign(
     { iat: Math.floor(date.getTime() / 1000) },
     services.config.get('server:auth:jwt-secret'),
-    { expiresIn: '2h' }
+    { expiresIn: '2h' },
   );
   ctx.set('Set-Cookie', `jwt-token=${token}; Max-Age=7200; Path=/`);
   ctx.body = {
-    token: token
+    token: token,
   };
 }
 
