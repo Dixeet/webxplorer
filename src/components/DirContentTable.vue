@@ -21,7 +21,7 @@
       </b-table-column>
       <b-table-column label="Actions" centered>
         <b-tooltip v-if="!props.row.isDirectory" label="Download">
-          <a :href="props.row.link">
+          <a :href="props.row.directDownloadLink">
             <b-icon
               class="has-text-link"
               icon="download"

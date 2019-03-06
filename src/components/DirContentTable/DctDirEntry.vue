@@ -24,6 +24,7 @@ export default {
         size: 0,
         link: '',
         zipLink: '',
+        directDownloadLink: '',
       }),
     },
   },

@@ -5,6 +5,7 @@ const download = require('./download');
 const configRoute = require('./config');
 const auth = require('./auth');
 const authRequired = require('./authRequired');
+const file = require('./file');
 
 router.get('/', ctx => {
   ctx.body = 'API endpoints';
@@ -12,6 +13,7 @@ router.get('/', ctx => {
 
 router.use('/dir', authRequired(), dir);
 router.use('/download', authRequired(), download);
+router.use('/file', authRequired(), file);
 router.use('/config', authRequired(), configRoute);
 router.use('/auth', auth);
 

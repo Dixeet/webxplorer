@@ -56,14 +56,18 @@ async function getDownloadHeaders(options) {
       },
       {
         header: 'Content-Type',
-        value: mime.contentType(options.path),
+        value: mime.contentType(
+          Path.extname(resolve(config.get('server:rootDir'), options.path)),
+        ),
       },
-      {
+    ];
+    if (!options.standardDisposition) {
+      headers.push({
         header: 'Content-Disposition',
         value: `attachment; filename="${options.name ||
           options.path.split('/').splice(-1, 1)[0]}"`,
-      },
-    ];
+      });
+    }
   }
   return headers;
 }
