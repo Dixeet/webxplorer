@@ -15,6 +15,23 @@ async function getFiles(path) {
         filePath,
       );
       const { mtimeMs, size, mtime } = await fs.stat(fullPath);
+      const encodedPath = services.encodePath(filePath);
+      let link = '';
+      if (file.isDirectory()) {
+        link = `/home/${encodedPath}`;
+      } else {
+        link = `${services.config.get(
+          'server:apiBaseUrl',
+        )}/download/file/${encodedPath}`;
+      }
+      let isZippable = true;
+      if (file.isDirectory()) {
+        const subFiles = await fs.readdir(fullPath);
+        isZippable = subFiles.length > 0;
+      }
+      const zipLink = `${services.config.get(
+        'server:apiBaseUrl',
+      )}/download/zip/${encodedPath}`;
       files.push({
         name: file.name,
         mtimeMs,
@@ -22,8 +39,11 @@ async function getFiles(path) {
         mtime,
         fullPath,
         path: filePath,
-        encodedPath: services.encodePath(filePath),
+        encodedPath,
         isDirectory: file.isDirectory(),
+        link,
+        zipLink,
+        isZippable,
       });
     }
   }

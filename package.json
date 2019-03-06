@@ -28,6 +28,7 @@
     "koa-jwt": "^3.5.1",
     "koa-router": "^7.4.0",
     "mime-types": "^2.1.22",
+    "moment": "^2.24.0",
     "nconf": "^0.10.0",
     "nuxt": "^2.4.0",
     "readdirp": "^2.2.1"

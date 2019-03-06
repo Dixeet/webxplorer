@@ -21,23 +21,12 @@
           </a>
         </div>
         <div class="navbar-menu" :class="{ 'is-active': $store.state.navbarBurgerIsActive}">
-          <div class="navbar-start">
-            <nuxt-link class="navbar-item" to="/home/">
-              Home
-            </nuxt-link>
-            <nuxt-link class="navbar-item" to="/home/normal">
-              Good
-            </nuxt-link>
-            <nuxt-link class="navbar-item" to="/home/tata/titi">
-              Wrong
-            </nuxt-link>
+          <div class="navbar-start" />
+        
+          <div class="navbar-end">
             <nuxt-link class="navbar-item" to="/login">
               Login
             </nuxt-link>
-          </div>
-        
-          <div class="navbar-end">
-            <div class="navbar-item" />
           </div>
         </div>
       </div>

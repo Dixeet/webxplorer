@@ -35,8 +35,13 @@ module.exports = function() {
       buff = await toBuff(zip);
     }
     if (stat.isDirectory()) {
-      zip.addLocalFolder(fullPath);
-      buff = await toBuff(zip);
+      const files = await fs.readdir(fullPath);
+      if (files.length > 0) {
+        zip.addLocalFolder(fullPath);
+        buff = await toBuff(zip);
+      } else {
+        ctx.throw(416, 'Folder is empty');
+      }
     }
     const date = new Date();
     ctx.set('Date', date.toUTCString());

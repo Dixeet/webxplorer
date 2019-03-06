@@ -1,16 +1,19 @@
 <template>
   <section class="section">
     <breadcrumb :path="breadcrumb" />
+    <dir-content-table :content="dirFiles" />
   </section>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import breadcrumb from '~/components/breadcrumb';
+import Breadcrumb from '~/components/Breadcrumb';
+import DirContentTable from '~/components/DirContentTable';
 
 export default {
   components: {
-    breadcrumb,
+    Breadcrumb,
+    DirContentTable,
   },
 
   computed: {

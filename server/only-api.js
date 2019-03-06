@@ -6,7 +6,7 @@ function start() {
   // Instantiate nuxt.js
 
   const host = '127.0.0.1';
-  const port = 3001;
+  const port = 3000;
 
   const router = require('./router')();
   app.use(router);

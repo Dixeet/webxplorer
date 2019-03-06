@@ -24,6 +24,7 @@ module.exports = {
   router: {
     middleware: 'auth',
     linkExactActiveClass: 'is-active',
+    // base: '/webxplorer/dist/',
   },
 
   /*
