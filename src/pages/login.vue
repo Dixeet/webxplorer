@@ -31,8 +31,10 @@ export default {
   }),
   methods: {
     login: async function() {
-      await this.$store.dispatch('login', { password: this.password });
-      this.$router.push('/home/');
+      try {
+        await this.$store.dispatch('login', { password: this.password });
+        this.$router.push('/home/');
+      } catch (e) {}
     },
   },
 };
