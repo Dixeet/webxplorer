@@ -24,15 +24,22 @@
           <div class="navbar-start" />
         
           <div class="navbar-end">
+            <nuxt-link v-if="isLogged" class="navbar-item" to="/configuration">
+              <b-tooltip position="is-bottom" label="Configuration">
+                <b-icon
+                  icon="cog"
+                />
+              </b-tooltip>
+            </nuxt-link>
             <nuxt-link v-if="!isLogged" class="navbar-item" to="/login">
-              <b-tooltip position="is-left" label="Login">
+              <b-tooltip position="is-bottom" label="Login">
                 <b-icon
                   icon="sign-in-alt"
                 />
               </b-tooltip>
             </nuxt-link>
             <a v-else class="navbar-item" @click.stop="logout">
-              <b-tooltip position="is-left" label="Logout">
+              <b-tooltip position="is-bottom" label="Logout">
                 <b-icon
                   icon="sign-out-alt"
                 />
