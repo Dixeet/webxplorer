@@ -27,6 +27,9 @@
             <nuxt-link class="navbar-item" to="/login">
               Login
             </nuxt-link>
+            <nuxt-link class="navbar-item" to="/home/tata/titi">
+              Wrong
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -47,11 +50,14 @@ export default {
     notification() {
       return this.$store.state.notification;
     },
+    notifyWatchable() {
+      return this.$store.state.notifyWatchable;
+    },
   },
 
   watch: {
-    notification: function(notify) {
-      this.notify(notify);
+    notifyWatchable: function() {
+      this.notify(this.notification);
     },
     isMounted: function(isMounted) {
       if (isMounted && this.notification.message) {
@@ -68,6 +74,10 @@ export default {
     notify: function(notif) {
       if (this.isMounted) {
         this.$toast.open({ message: notif.message, type: notif.type });
+        this.$store.commit('notify', {
+          message: '',
+          type: '',
+        });
       }
     },
   },
