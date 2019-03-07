@@ -4,15 +4,16 @@ export const state = () => ({
       apiBaseUrl: '/api',
       auth: {
         enable: false,
+        tokenExpires: 3600,
       },
     },
   },
-  ssrActions: [],
   language: 'en',
   notification: { message: '', type: '' },
   navbarBurgerIsActive: false,
   isLogged: false,
   notifyWatchable: false,
+  renewTimeout: null,
 });
 
 export const mutations = {
@@ -34,11 +35,11 @@ export const mutations = {
   isNotLogged(state) {
     state.isLogged = false;
   },
-  setSsrActions(state, actions = []) {
-    state.ssrActions = actions;
-  },
   notifyWatchable(state) {
     state.notifyWatchable = !state.notifyWatchable;
+  },
+  setRenewTimeout(state, renewTimeout) {
+    state.renewTimeout = renewTimeout;
   },
 };
 
@@ -63,12 +64,31 @@ export const actions = {
     commit('notify', notification);
     commit('notifyWatchable');
   },
-  async login({ commit, state }, payload = { password: '', renew: false }) {
+  async login({ commit, dispatch }, payload = { password: '', renew: false }) {
     const data = await this.$axios.$post('/auth/login', {
       password: payload.password,
     });
     if (data && data.token) {
       commit('isLogged');
     }
+    dispatch('renew', { notInstant: true });
+  },
+  async renew({ commit, state, dispatch }, payload = { notInstant: false }) {
+    const timer = Math.floor(
+      (state.config.server.auth.tokenExpires * 1000 * 4) / 5,
+    );
+    if (state.renewTimeout) {
+      clearTimeout(state.renewTimeout);
+    }
+    if (!payload.notInstant) {
+      const data = await this.$axios.$get('/auth/renew', { progress: false });
+      if (data && data.token && !state.isLogged) {
+        commit('isLogged');
+      }
+    }
+    const renewTimeout = setTimeout(() => {
+      dispatch('renew');
+    }, timer);
+    commit('setRenewTimeout', renewTimeout);
   },
 };

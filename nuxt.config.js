@@ -42,7 +42,11 @@ module.exports = {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: ['~plugins/buefy.js', '~plugins/axios-error.js'],
+  plugins: [
+    '~plugins/buefy.js',
+    '~plugins/axios-error.js',
+    { src: '~plugins/onFrontLoad.client.js', ssr: false },
+  ],
 
   /*
   ** Nuxt.js modules
