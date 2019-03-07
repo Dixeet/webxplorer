@@ -6,6 +6,7 @@
           <b-field label="Login">
             <b-field>
               <b-input
+                ref="passwordInput"
                 v-model="password"
                 type="password"
                 placeholder="Password"
@@ -29,6 +30,11 @@ export default {
   data: () => ({
     password: '',
   }),
+
+  mounted() {
+    this.$refs.passwordInput.focus();
+  },
+
   methods: {
     login: async function() {
       try {
