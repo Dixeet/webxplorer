@@ -5,7 +5,8 @@
     "auth": {
       "enable": false,
       "password": "",
-      "jwt-secret": ""
+      "jwt-secret": "",
+      "tokenExpires": 7200
     }
   }
 }

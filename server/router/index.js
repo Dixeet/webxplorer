@@ -22,9 +22,15 @@ module.exports = function(nuxt) {
     router.get('*', ctx => {
       ctx.status = 200;
       ctx.respond = false; // Bypass Koa's built-in response handling test
+      ctx.req.isLogged = !!ctx.state.jwtdata;
       ctx.req.config = {
-        apiBaseUrl: services.config.get('server:apiBaseUrl'),
-        authEnable: services.config.get('server:auth:enable'),
+        server: {
+          apiBaseUrl: services.config.get('server:apiBaseUrl'),
+          auth: {
+            enable: services.config.get('server:auth:enable'),
+            tokenExpires: services.config.get('server:auth:tokenExpires'),
+          },
+        },
       };
       nuxt.render(ctx.req, ctx.res);
     });

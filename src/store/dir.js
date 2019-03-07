@@ -41,18 +41,7 @@ export const mutations = {
 
 export const actions = {
   async readDir({ commit }, path = '') {
-    try {
-      commit('setDirFiles', await this.$axios.$get('/dir/' + path));
-      commit('setCurrentPath', path);
-    } catch (e) {
-      commit(
-        'notify',
-        { message: e.message, type: 'is-danger' },
-        { root: true },
-      );
-      setImmediate(() => {
-        this.$router.back();
-      });
-    }
+    commit('setDirFiles', await this.$axios.$get('/dir/' + path));
+    commit('setCurrentPath', path);
   },
 };
