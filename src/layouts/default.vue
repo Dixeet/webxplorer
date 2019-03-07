@@ -24,12 +24,20 @@
           <div class="navbar-start" />
         
           <div class="navbar-end">
-            <nuxt-link class="navbar-item" to="/login">
-              Login
+            <nuxt-link v-if="!isLogged" class="navbar-item" to="/login">
+              <b-tooltip position="is-left" label="Login">
+                <b-icon
+                  icon="sign-in-alt"
+                />
+              </b-tooltip>
             </nuxt-link>
-            <nuxt-link class="navbar-item" to="/home/tata/titi">
-              Wrong
-            </nuxt-link>
+            <a v-else class="navbar-item" @click.stop="logout">
+              <b-tooltip position="is-left" label="Logout">
+                <b-icon
+                  icon="sign-out-alt"
+                />
+              </b-tooltip>
+            </a>
           </div>
         </div>
       </div>
@@ -41,6 +49,7 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 export default {
   data: () => ({
     isMounted: false,
@@ -52,6 +61,9 @@ export default {
     },
     notifyWatchable() {
       return this.$store.state.notifyWatchable;
+    },
+    isLogged() {
+      return this.$store.state.isLogged;
     },
   },
 
@@ -79,6 +91,10 @@ export default {
           type: '',
         });
       }
+    },
+    logout: function() {
+      Cookies.remove('jwt-token');
+      this.$router.push('/login');
     },
   },
 };
