@@ -69,7 +69,7 @@ export default {
   },
 
   methods: {
-    pushConfig() {
+    async pushConfig() {
       const config = {};
       for (const key of Object.keys(this.config)) {
         if (this.config[key] !== this.$store.state.configuration.config[key]) {
@@ -79,7 +79,11 @@ export default {
               : this.config[key];
         }
       }
-      this.$store.dispatch('configuration/pushConfig', config);
+      await this.$store.dispatch('configuration/pushConfig', config);
+      this.$store.dispatch('notify', {
+        message: 'Configuration saved',
+        type: 'is-success',
+      });
     },
   },
 };
