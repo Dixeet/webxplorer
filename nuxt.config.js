@@ -90,6 +90,9 @@ module.exports = {
           },
         });
       }
+      if (ctx.isDev) {
+        config.devtool = 'cheap-module-eval-source-map';
+      }
     },
   },
 };
