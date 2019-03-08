@@ -28,19 +28,13 @@
             />
           </a>
         </b-tooltip>
-        <b-tooltip v-else-if="props.row.isZippable" label="Zip">
-          <a :href="props.row.zipLink">
+        <b-tooltip v-else label="Zip">
+          <a :href="props.row.zipLink" @click="zipping">
             <b-icon
               class="has-text-link"
               icon="file-archive"
             />
           </a>
-        </b-tooltip>
-        <b-tooltip v-else label="Directory empty : unzippable">
-          <b-icon
-            class="has-text-grey"
-            icon="file-archive"
-          />
         </b-tooltip>
       </b-table-column>
     </template>
@@ -89,6 +83,9 @@ export default {
       const pre = (si ? 'kMGTPE' : 'KMGTPE')[exp - 1] + (si ? '' : 'i') + 'B';
       const n = bytes / Math.pow(unit, exp);
       return (n % 1 === 0 ? n : n.toFixed(2)) + pre;
+    },
+    zipping: function() {
+      console.log('zipping');
     },
   },
 };

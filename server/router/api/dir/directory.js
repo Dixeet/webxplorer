@@ -21,13 +21,10 @@ async function getFiles(path) {
       )}/download/zip/${encodedPath}`;
 
       let link = '';
-      let isZippable = true;
       let directDownloadLink = '';
 
       if (file.isDirectory()) {
         link = `/home/${encodedPath}`;
-        const subFiles = await fs.readdir(fullPath);
-        isZippable = subFiles.length > 0;
         directDownloadLink = zipLink;
       } else {
         link = `${services.config.get(
@@ -50,7 +47,6 @@ async function getFiles(path) {
         link,
         zipLink,
         directDownloadLink,
-        isZippable,
       });
     }
   }
