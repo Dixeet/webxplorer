@@ -34,6 +34,6 @@ export default {
 <style scoped >
 .link a,
 .link {
-  color: #dbdbdb;
+  color: #b3daff;
 }
 </style>
