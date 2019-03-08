@@ -16,6 +16,10 @@ async function zippify(
     zlib: { level: 3 },
   });
   ctx.body = zip;
+  ctx.body.on('end', () => {
+    ctx.session.isDownloading = false;
+    console.log('end');
+  });
   const date = new Date();
   ctx.set('Date', date.toUTCString());
   ctx.set('Content-Disposition', `attachment; filename="${options.name}"`);
@@ -44,6 +48,7 @@ async function zippify(
 
 module.exports = function() {
   return async function zipMiddleware(ctx) {
+    ctx.session.isDownloading = true;
     await zippify(
       ctx,
       [
