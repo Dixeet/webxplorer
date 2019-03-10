@@ -24,7 +24,11 @@
           <div class="navbar-start" />
         
           <div class="navbar-end">
-            <nuxt-link v-if="isLogged" class="navbar-item" to="/configuration">
+            <nuxt-link
+              v-if="isLogged || !$store.state.config.server.auth.enable"
+              class="navbar-item"
+              to="/configuration"
+            >
               <b-tooltip position="is-bottom" label="Configuration">
                 <b-icon
                   icon="cog"
